@@ -1,10 +1,12 @@
 package it.gabrieletondi.telldontaskkata.domain.order.status;
 
+import it.gabrieletondi.telldontaskkata.domain.order.Order;
+
 public interface OrderStatus {
 
-     void reject();
+     OrderStatus reject();
      
-     void approve();
+     OrderStatus approve();
      
-     void ship();
+     OrderStatus ship();
 }
