@@ -5,6 +5,11 @@ import it.gabrieletondi.telldontaskkata.domain.exception.RejectedOrderCannotBeAp
 
 public class RejectedOrderStatus implements OrderStatus {
     @Override
+    public OrderStatusType getStatusType() {
+        return OrderStatusType.REJECTED;
+    }
+
+    @Override
     public OrderStatus reject() {
         return this;
     }

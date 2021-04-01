@@ -5,6 +5,11 @@ import it.gabrieletondi.telldontaskkata.domain.exception.OrderCannotBeShippedExc
 public class CreatedOrderStatus implements OrderStatus {
 
     @Override
+    public OrderStatusType getStatusType() {
+        return OrderStatusType.CREATED;
+    }
+
+    @Override
     public OrderStatus reject() {
         return new RejectedOrderStatus();
     }

@@ -7,6 +7,11 @@ public class ShippedOrderStatus implements OrderStatus {
 
 
     @Override
+    public OrderStatusType getStatusType() {
+        return OrderStatusType.SHIPPED;
+    }
+
+    @Override
     public OrderStatus reject() {
         throw new ShippedOrdersCannotBeChangedException();
     }

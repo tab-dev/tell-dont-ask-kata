@@ -4,6 +4,8 @@ import it.gabrieletondi.telldontaskkata.domain.order.Order;
 
 public interface OrderStatus {
 
+     OrderStatusType getStatusType();
+
      OrderStatus reject();
      
      OrderStatus approve();
