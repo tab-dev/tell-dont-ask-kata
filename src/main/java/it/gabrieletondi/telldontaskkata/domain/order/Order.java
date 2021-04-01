@@ -1,5 +1,6 @@
 package it.gabrieletondi.telldontaskkata.domain.order;
 
+import it.gabrieletondi.telldontaskkata.domain.order.status.CreatedOrderStatus;
 import it.gabrieletondi.telldontaskkata.domain.order.status.OrderStatus;
 import it.gabrieletondi.telldontaskkata.domain.order.status.OrderStatusType;
 
@@ -14,6 +15,10 @@ public class Order {
     private OrderStatus orderStatus;
     private OrderStatusType statusType;
     private int id;
+
+    public Order() {
+        orderStatus = new CreatedOrderStatus();
+    }
 
     public BigDecimal getTotal() {
         return total;
