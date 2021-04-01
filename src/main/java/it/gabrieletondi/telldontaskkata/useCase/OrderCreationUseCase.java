@@ -2,7 +2,7 @@ package it.gabrieletondi.telldontaskkata.useCase;
 
 import it.gabrieletondi.telldontaskkata.domain.order.Order;
 import it.gabrieletondi.telldontaskkata.domain.order.OrderItem;
-import it.gabrieletondi.telldontaskkata.domain.order.status.OrderStatus;
+import it.gabrieletondi.telldontaskkata.domain.order.status.OrderStatusType;
 import it.gabrieletondi.telldontaskkata.domain.Product;
 import it.gabrieletondi.telldontaskkata.repository.OrderRepository;
 import it.gabrieletondi.telldontaskkata.repository.ProductCatalog;
@@ -24,7 +24,7 @@ public class OrderCreationUseCase {
 
     public void run(SellItemsRequest request) {
         Order order = new Order();
-        order.setStatus(OrderStatus.CREATED);
+        order.setStatus(OrderStatusType.CREATED);
         order.setItems(new ArrayList<>());
         order.setCurrency("EUR");
         order.setTotal(new BigDecimal("0.00"));

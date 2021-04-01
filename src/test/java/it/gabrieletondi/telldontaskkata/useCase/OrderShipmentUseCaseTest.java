@@ -1,7 +1,7 @@
 package it.gabrieletondi.telldontaskkata.useCase;
 
 import it.gabrieletondi.telldontaskkata.domain.order.Order;
-import it.gabrieletondi.telldontaskkata.domain.order.status.OrderStatus;
+import it.gabrieletondi.telldontaskkata.domain.order.status.OrderStatusType;
 import it.gabrieletondi.telldontaskkata.doubles.TestOrderRepository;
 import it.gabrieletondi.telldontaskkata.doubles.TestShipmentService;
 import org.junit.Test;
@@ -19,7 +19,7 @@ public class OrderShipmentUseCaseTest {
     public void shipApprovedOrder() throws Exception {
         Order initialOrder = new Order();
         initialOrder.setId(1);
-        initialOrder.setStatus(OrderStatus.APPROVED);
+        initialOrder.setStatus(OrderStatusType.APPROVED);
         orderRepository.addOrder(initialOrder);
 
         OrderShipmentRequest request = new OrderShipmentRequest();
@@ -27,7 +27,7 @@ public class OrderShipmentUseCaseTest {
 
         useCase.run(request);
 
-        assertThat(orderRepository.getSavedOrder().getStatus(), is(OrderStatus.SHIPPED));
+        assertThat(orderRepository.getSavedOrder().getStatus(), is(OrderStatusType.SHIPPED));
         assertThat(shipmentService.getShippedOrder(), is(initialOrder));
     }
 
@@ -35,7 +35,7 @@ public class OrderShipmentUseCaseTest {
     public void createdOrdersCannotBeShipped() throws Exception {
         Order initialOrder = new Order();
         initialOrder.setId(1);
-        initialOrder.setStatus(OrderStatus.CREATED);
+        initialOrder.setStatus(OrderStatusType.CREATED);
         orderRepository.addOrder(initialOrder);
 
         OrderShipmentRequest request = new OrderShipmentRequest();
@@ -51,7 +51,7 @@ public class OrderShipmentUseCaseTest {
     public void rejectedOrdersCannotBeShipped() throws Exception {
         Order initialOrder = new Order();
         initialOrder.setId(1);
-        initialOrder.setStatus(OrderStatus.REJECTED);
+        initialOrder.setStatus(OrderStatusType.REJECTED);
         orderRepository.addOrder(initialOrder);
 
         OrderShipmentRequest request = new OrderShipmentRequest();
@@ -67,7 +67,7 @@ public class OrderShipmentUseCaseTest {
     public void shippedOrdersCannotBeShippedAgain() throws Exception {
         Order initialOrder = new Order();
         initialOrder.setId(1);
-        initialOrder.setStatus(OrderStatus.SHIPPED);
+        initialOrder.setStatus(OrderStatusType.SHIPPED);
         orderRepository.addOrder(initialOrder);
 
         OrderShipmentRequest request = new OrderShipmentRequest();

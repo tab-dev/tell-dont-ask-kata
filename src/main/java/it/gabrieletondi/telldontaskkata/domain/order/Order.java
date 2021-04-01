@@ -1,6 +1,6 @@
 package it.gabrieletondi.telldontaskkata.domain.order;
 
-import it.gabrieletondi.telldontaskkata.domain.order.status.OrderStatus;
+import it.gabrieletondi.telldontaskkata.domain.order.status.OrderStatusType;
 
 import java.math.BigDecimal;
 import java.util.List;
@@ -10,7 +10,7 @@ public class Order {
     private String currency;
     private List<OrderItem> items;
     private BigDecimal tax;
-    private OrderStatus status;
+    private OrderStatusType status;
     private int id;
 
     public BigDecimal getTotal() {
@@ -45,11 +45,11 @@ public class Order {
         this.tax = tax;
     }
 
-    public OrderStatus getStatus() {
+    public OrderStatusType getStatus() {
         return status;
     }
 
-    public void setStatus(OrderStatus status) {
+    public void setStatus(OrderStatusType status) {
         this.status = status;
     }
 
