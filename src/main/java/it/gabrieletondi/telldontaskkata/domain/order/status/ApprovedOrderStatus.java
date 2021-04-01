@@ -1,5 +1,7 @@
 package it.gabrieletondi.telldontaskkata.domain.order.status;
 
+import it.gabrieletondi.telldontaskkata.domain.exception.ApprovedOrderCannotBeRejectedException;
+
 public class ApprovedOrderStatus implements OrderStatus {
     @Override
     public OrderStatusType getStatusType() {
@@ -8,16 +10,16 @@ public class ApprovedOrderStatus implements OrderStatus {
 
     @Override
     public OrderStatus reject() {
-        return null;
+        throw new ApprovedOrderCannotBeRejectedException();
     }
 
     @Override
     public OrderStatus approve() {
-        return null;
+        return this;
     }
 
     @Override
     public OrderStatus ship() {
-        return null;
+        return new ShippedOrderStatus();
     }
 }
