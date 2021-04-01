@@ -1,5 +1,7 @@
 package it.gabrieletondi.telldontaskkata.domain.order;
 
+import it.gabrieletondi.telldontaskkata.domain.order.status.OrderStatus;
+
 import java.math.BigDecimal;
 import java.util.List;
 

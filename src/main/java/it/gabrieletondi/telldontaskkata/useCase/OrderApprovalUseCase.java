@@ -1,7 +1,7 @@
 package it.gabrieletondi.telldontaskkata.useCase;
 
 import it.gabrieletondi.telldontaskkata.domain.order.Order;
-import it.gabrieletondi.telldontaskkata.domain.order.OrderStatus;
+import it.gabrieletondi.telldontaskkata.domain.order.status.OrderStatus;
 import it.gabrieletondi.telldontaskkata.repository.OrderRepository;
 
 public class OrderApprovalUseCase {
