@@ -1,5 +1,6 @@
 package it.gabrieletondi.telldontaskkata.useCase;
 
+import it.gabrieletondi.telldontaskkata.domain.exception.UnknownProductException;
 import it.gabrieletondi.telldontaskkata.domain.order.Order;
 import it.gabrieletondi.telldontaskkata.domain.order.OrderItem;
 import it.gabrieletondi.telldontaskkata.domain.order.status.OrderStatusType;
