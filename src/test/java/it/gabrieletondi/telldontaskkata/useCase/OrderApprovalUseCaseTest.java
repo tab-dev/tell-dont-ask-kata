@@ -19,7 +19,7 @@ public class OrderApprovalUseCaseTest {
     @Test
     public void approvedExistingOrder() throws Exception {
         Order initialOrder = new Order();
-        initialOrder.setStatus(OrderStatusType.CREATED);
+        initialOrder.setStatusType(OrderStatusType.CREATED);
         initialOrder.setId(1);
         orderRepository.addOrder(initialOrder);
 
@@ -30,13 +30,13 @@ public class OrderApprovalUseCaseTest {
         useCase.run(request);
 
         final Order savedOrder = orderRepository.getSavedOrder();
-        assertThat(savedOrder.getStatus(), is(OrderStatusType.APPROVED));
+        assertThat(savedOrder.getStatusType(), is(OrderStatusType.APPROVED));
     }
 
     @Test
     public void rejectedExistingOrder() throws Exception {
         Order initialOrder = new Order();
-        initialOrder.setStatus(OrderStatusType.CREATED);
+        initialOrder.setStatusType(OrderStatusType.CREATED);
         initialOrder.setId(1);
         orderRepository.addOrder(initialOrder);
 
@@ -47,13 +47,13 @@ public class OrderApprovalUseCaseTest {
         useCase.run(request);
 
         final Order savedOrder = orderRepository.getSavedOrder();
-        assertThat(savedOrder.getStatus(), is(OrderStatusType.REJECTED));
+        assertThat(savedOrder.getStatusType(), is(OrderStatusType.REJECTED));
     }
 
     @Test(expected = RejectedOrderCannotBeApprovedException.class)
     public void cannotApproveRejectedOrder() throws Exception {
         Order initialOrder = new Order();
-        initialOrder.setStatus(OrderStatusType.REJECTED);
+        initialOrder.setStatusType(OrderStatusType.REJECTED);
         initialOrder.setId(1);
         orderRepository.addOrder(initialOrder);
 
@@ -69,7 +69,7 @@ public class OrderApprovalUseCaseTest {
     @Test(expected = ApprovedOrderCannotBeRejectedException.class)
     public void cannotRejectApprovedOrder() throws Exception {
         Order initialOrder = new Order();
-        initialOrder.setStatus(OrderStatusType.APPROVED);
+        initialOrder.setStatusType(OrderStatusType.APPROVED);
         initialOrder.setId(1);
         orderRepository.addOrder(initialOrder);
 
@@ -85,7 +85,7 @@ public class OrderApprovalUseCaseTest {
     @Test(expected = ShippedOrdersCannotBeChangedException.class)
     public void shippedOrdersCannotBeApproved() throws Exception {
         Order initialOrder = new Order();
-        initialOrder.setStatus(OrderStatusType.SHIPPED);
+        initialOrder.setStatusType(OrderStatusType.SHIPPED);
         initialOrder.setId(1);
         orderRepository.addOrder(initialOrder);
 
@@ -101,7 +101,7 @@ public class OrderApprovalUseCaseTest {
     @Test(expected = ShippedOrdersCannotBeChangedException.class)
     public void shippedOrdersCannotBeRejected() throws Exception {
         Order initialOrder = new Order();
-        initialOrder.setStatus(OrderStatusType.SHIPPED);
+        initialOrder.setStatusType(OrderStatusType.SHIPPED);
         initialOrder.setId(1);
         orderRepository.addOrder(initialOrder);
 

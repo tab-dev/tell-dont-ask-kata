@@ -10,7 +10,7 @@ public class Order {
     private String currency;
     private List<OrderItem> items;
     private BigDecimal tax;
-    private OrderStatusType status;
+    private OrderStatusType statusType;
     private int id;
 
     public BigDecimal getTotal() {
@@ -45,12 +45,12 @@ public class Order {
         this.tax = tax;
     }
 
-    public OrderStatusType getStatus() {
-        return status;
+    public OrderStatusType getStatusType() {
+        return statusType;
     }
 
-    public void setStatus(OrderStatusType status) {
-        this.status = status;
+    public void setStatusType(OrderStatusType statusType) {
+        this.statusType = statusType;
     }
 
     public int getId() {
