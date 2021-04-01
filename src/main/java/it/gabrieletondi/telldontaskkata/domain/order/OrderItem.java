@@ -1,4 +1,6 @@
-package it.gabrieletondi.telldontaskkata.domain;
+package it.gabrieletondi.telldontaskkata.domain.order;
+
+import it.gabrieletondi.telldontaskkata.domain.Product;
 
 import java.math.BigDecimal;
 
