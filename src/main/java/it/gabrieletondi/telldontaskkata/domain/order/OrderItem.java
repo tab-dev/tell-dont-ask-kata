@@ -40,6 +40,10 @@ public class OrderItem {
         this.tax = tax;
     }
 
+    public BigDecimal getTaxAmount(){
+        return this.product.getUnitaryTax().multiply(BigDecimal.valueOf(this.quantity));
+    }
+
     public BigDecimal getTaxedAmount(){
         return product.getUnitaryTaxAmount()
                 .multiply(BigDecimal.valueOf(quantity))
