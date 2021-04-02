@@ -55,7 +55,7 @@ public class OrderServiceImplTest {
     @Test
     public void createOrderTest() {
         List<OrderItem> orderItems = new ArrayList<>();
-        orderItems.add(new OrderItem(new Product("product", BigDecimal.ONE,new Category()), 2));
+        orderItems.add(new OrderItem(new Product("product", BigDecimal.ONE,new Category("food",BigDecimal.valueOf(10))), 2));
 
         Order order = orderService.create(orderItems);
 
