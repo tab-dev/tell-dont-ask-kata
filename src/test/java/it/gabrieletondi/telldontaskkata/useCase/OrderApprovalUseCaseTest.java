@@ -18,8 +18,7 @@ public class OrderApprovalUseCaseTest {
 
     @Test
     public void approvedExistingOrder() throws Exception {
-        Order initialOrder = new Order();
-        initialOrder.setId(1);
+        Order initialOrder = new Order(1,"EUR");
         orderRepository.addOrder(initialOrder);
 
         OrderApprovalRequest request = new OrderApprovalRequest();
@@ -34,8 +33,7 @@ public class OrderApprovalUseCaseTest {
 
     @Test
     public void rejectedExistingOrder() throws Exception {
-        Order initialOrder = new Order();
-        initialOrder.setId(1);
+        Order initialOrder = new Order(1,"EUR");
         orderRepository.addOrder(initialOrder);
 
         OrderApprovalRequest request = new OrderApprovalRequest();
@@ -50,8 +48,7 @@ public class OrderApprovalUseCaseTest {
 
     @Test(expected = RejectedOrderCannotBeApprovedException.class)
     public void cannotApproveRejectedOrder() throws Exception {
-        Order initialOrder = new Order();
-        initialOrder.setId(1);
+        Order initialOrder = new Order(1,"EUR");
         orderRepository.addOrder(initialOrder);
         initialOrder.reject();
 
@@ -66,8 +63,7 @@ public class OrderApprovalUseCaseTest {
 
     @Test(expected = ApprovedOrderCannotBeRejectedException.class)
     public void cannotRejectApprovedOrder() throws Exception {
-        Order initialOrder = new Order();
-        initialOrder.setId(1);
+        Order initialOrder = new Order(1,"EUR");
         orderRepository.addOrder(initialOrder);
         initialOrder.approve();
 
@@ -82,8 +78,7 @@ public class OrderApprovalUseCaseTest {
 
     @Test(expected = ShippedOrdersCannotBeChangedException.class)
     public void shippedOrdersCannotBeApproved() throws Exception {
-        Order initialOrder = new Order();
-        initialOrder.setId(1);
+        Order initialOrder = new Order(1,"EUR");
         orderRepository.addOrder(initialOrder);
         initialOrder.approve();
         initialOrder.ship();
@@ -99,8 +94,7 @@ public class OrderApprovalUseCaseTest {
 
     @Test(expected = ShippedOrdersCannotBeChangedException.class)
     public void shippedOrdersCannotBeRejected() throws Exception {
-        Order initialOrder = new Order();
-        initialOrder.setId(1);
+        Order initialOrder = new Order(1,"EUR");
         orderRepository.addOrder(initialOrder);
         initialOrder.approve();
         initialOrder.ship();

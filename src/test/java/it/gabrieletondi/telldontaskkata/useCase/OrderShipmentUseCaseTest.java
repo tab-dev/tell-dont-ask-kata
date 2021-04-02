@@ -19,8 +19,7 @@ public class OrderShipmentUseCaseTest {
 
     @Test
     public void shipApprovedOrder() throws Exception {
-        Order initialOrder = new Order();
-        initialOrder.setId(1);
+        Order initialOrder = new Order(1,"EUR");
         initialOrder.approve();
 
         orderRepository.addOrder(initialOrder);
@@ -36,8 +35,7 @@ public class OrderShipmentUseCaseTest {
 
     @Test(expected = OrderCannotBeShippedException.class)
     public void createdOrdersCannotBeShipped() throws Exception {
-        Order initialOrder = new Order();
-        initialOrder.setId(1);
+        Order initialOrder = new Order(1,"EUR");
         orderRepository.addOrder(initialOrder);
 
         OrderShipmentRequest request = new OrderShipmentRequest();
@@ -51,8 +49,7 @@ public class OrderShipmentUseCaseTest {
 
     @Test(expected = OrderCannotBeShippedException.class)
     public void rejectedOrdersCannotBeShipped() throws Exception {
-        Order initialOrder = new Order();
-        initialOrder.setId(1);
+        Order initialOrder = new Order(1,"EUR");
         orderRepository.addOrder(initialOrder);
 
         OrderShipmentRequest request = new OrderShipmentRequest();
@@ -66,8 +63,7 @@ public class OrderShipmentUseCaseTest {
 
     @Test(expected = OrderCannotBeShippedTwiceException.class)
     public void shippedOrdersCannotBeShippedAgain() throws Exception {
-        Order initialOrder = new Order();
-        initialOrder.setId(1);
+        Order initialOrder = new Order(1,"EUR");
         orderRepository.addOrder(initialOrder);
         initialOrder.approve();
         initialOrder.ship();

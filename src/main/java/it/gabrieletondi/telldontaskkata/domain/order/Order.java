@@ -10,19 +10,39 @@ import java.util.Collections;
 import java.util.List;
 
 public class Order {
-    private String currency;
+    private int id;
     private List<OrderItem> items;
     private OrderStatus orderStatus;
-    private int id;
+    private String currency;
 
-    public Order() {
-        orderStatus = new CreatedOrderStatus();
+    public Order(int id, String currency) {
+        this.id = id;
+        this.currency = currency;
+        this.orderStatus = new CreatedOrderStatus();
         this.items = new ArrayList<>();
     }
 
-    public Order(List<OrderItem> items, OrderStatus orderStatus) {
+    public Order(int id, List<OrderItem> items, OrderStatus orderStatus, String currency) {
+        this.id = id;
         this.items = items;
         this.orderStatus = orderStatus;
+        this.currency = currency;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public String getCurrency() {
+        return currency;
+    }
+
+    public List<OrderItem> getItems() {
+        return Collections.unmodifiableList(items);
+    }
+
+    public OrderStatusType getStatusType() {
+        return this.orderStatus.getStatusType();
     }
 
     public BigDecimal getTotal() {
@@ -32,35 +52,11 @@ public class Order {
                 .orElse(BigDecimal.ZERO);
     }
 
-    public String getCurrency() {
-        return currency;
-    }
-
-    public void setCurrency(String currency) {
-        this.currency = currency;
-    }
-
-    public List<OrderItem> getItems() {
-        return Collections.unmodifiableList(items);
-    }
-
     public BigDecimal getTax() {
         return this.items.stream()
                 .map(orderItem -> orderItem.getTax())
-                .reduce((tax1,tax2) -> tax1.add(tax2))
+                .reduce((tax1, tax2) -> tax1.add(tax2))
                 .orElse(BigDecimal.ZERO);
-    }
-
-    public OrderStatusType getStatusType() {
-        return this.orderStatus.getStatusType();
-    }
-
-    public int getId() {
-        return id;
-    }
-
-    public void setId(int id) {
-        this.id = id;
     }
 
     public void addOrderItem(OrderItem orderItem) {
