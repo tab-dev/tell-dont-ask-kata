@@ -23,17 +23,10 @@ public class OrderShipmentUseCase {
     public void run(OrderShipmentRequest request) {
         final Order order = orderRepository.getById(request.getOrderId());
 
-        if (order.getStatusType().equals(CREATED) || order.getStatusType().equals(REJECTED)) {
-            throw new OrderCannotBeShippedException();
-        }
-
-        if (order.getStatusType().equals(SHIPPED)) {
-            throw new OrderCannotBeShippedTwiceException();
-        }
-
         shipmentService.ship(order);
 
-        order.setStatusType(OrderStatusType.SHIPPED);
+        order.ship();
+
         orderRepository.save(order);
     }
 }

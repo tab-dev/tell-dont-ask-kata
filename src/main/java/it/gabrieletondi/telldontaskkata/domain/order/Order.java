@@ -13,7 +13,6 @@ public class Order {
     private List<OrderItem> items;
     private BigDecimal tax;
     private OrderStatus orderStatus;
-    private OrderStatusType statusType;
     private int id;
 
     public Order() {
@@ -53,11 +52,7 @@ public class Order {
     }
 
     public OrderStatusType getStatusType() {
-        return statusType;
-    }
-
-    public void setStatusType(OrderStatusType statusType) {
-        this.statusType = statusType;
+        return this.orderStatus.getStatusType();
     }
 
     public int getId() {
