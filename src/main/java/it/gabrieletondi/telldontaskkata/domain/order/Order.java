@@ -5,6 +5,7 @@ import it.gabrieletondi.telldontaskkata.domain.order.status.OrderStatus;
 import it.gabrieletondi.telldontaskkata.domain.order.status.OrderStatusType;
 
 import java.math.BigDecimal;
+import java.util.ArrayList;
 import java.util.List;
 
 public class Order {
@@ -17,6 +18,12 @@ public class Order {
 
     public Order() {
         orderStatus = new CreatedOrderStatus();
+        this.items = new ArrayList<>();
+    }
+
+    public Order(List<OrderItem> items, OrderStatus orderStatus) {
+        this.items = items;
+        this.orderStatus = orderStatus;
     }
 
     public BigDecimal getTotal() {
