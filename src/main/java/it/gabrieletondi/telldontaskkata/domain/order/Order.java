@@ -12,7 +12,6 @@ import java.util.List;
 public class Order {
     private String currency;
     private List<OrderItem> items;
-    private BigDecimal tax;
     private OrderStatus orderStatus;
     private int id;
 
@@ -46,11 +45,10 @@ public class Order {
     }
 
     public BigDecimal getTax() {
-        return tax;
-    }
-
-    public void setTax(BigDecimal tax) {
-        this.tax = tax;
+        return this.items.stream()
+                .map(orderItem -> orderItem.getTax())
+                .reduce((tax1,tax2) -> tax1.add(tax2))
+                .orElse(BigDecimal.ZERO);
     }
 
     public OrderStatusType getStatusType() {

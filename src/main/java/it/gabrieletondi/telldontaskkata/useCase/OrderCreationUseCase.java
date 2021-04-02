@@ -26,7 +26,6 @@ public class OrderCreationUseCase {
     public void run(SellItemsRequest request) {
         Order order = new Order();
         order.setCurrency("EUR");
-        order.setTax(new BigDecimal("0.00"));
 
         for (SellItemRequest itemRequest : request.getRequests()) {
             Product product = productCatalog.getByName(itemRequest.getProductName());
@@ -35,13 +34,8 @@ public class OrderCreationUseCase {
                 throw new UnknownProductException();
             }
             else {
-                final BigDecimal unitaryTax = product.getPrice().divide(valueOf(100)).multiply(product.getCategory().getTaxPercentage()).setScale(2, HALF_UP);
-                final BigDecimal taxAmount = unitaryTax.multiply(BigDecimal.valueOf(itemRequest.getQuantity()));
-
                 final OrderItem orderItem = new OrderItem(product,itemRequest.getQuantity());
                 order.addOrderItem(orderItem);
-
-                order.setTax(order.getTax().add(taxAmount));
             }
         }
 
