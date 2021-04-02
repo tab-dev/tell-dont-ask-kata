@@ -68,6 +68,10 @@ public class Order {
         this.id = id;
     }
 
+    public void addOrderItem(OrderItem orderItem){
+        this.items.add(orderItem);
+    }
+
     public void approve() {
         this.orderStatus = this.orderStatus.approve();
     }
