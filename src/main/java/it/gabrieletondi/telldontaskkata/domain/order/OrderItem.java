@@ -4,6 +4,8 @@ import it.gabrieletondi.telldontaskkata.domain.Product;
 
 import java.math.BigDecimal;
 
+import static java.math.RoundingMode.HALF_UP;
+
 public class OrderItem {
     private Product product;
     private int quantity;
@@ -26,10 +28,6 @@ public class OrderItem {
         this.quantity = quantity;
     }
 
-    public BigDecimal getTaxedAmount() {
-        return taxedAmount;
-    }
-
     public void setTaxedAmount(BigDecimal taxedAmount) {
         this.taxedAmount = taxedAmount;
     }
@@ -40,5 +38,11 @@ public class OrderItem {
 
     public void setTax(BigDecimal tax) {
         this.tax = tax;
+    }
+
+    public BigDecimal getTaxedAmount(){
+        return product.getUnitaryTaxAmount()
+                .multiply(BigDecimal.valueOf(quantity))
+                .setScale(2, HALF_UP);
     }
 }
