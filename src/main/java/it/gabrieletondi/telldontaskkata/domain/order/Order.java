@@ -6,6 +6,7 @@ import it.gabrieletondi.telldontaskkata.domain.order.status.OrderStatusType;
 
 import java.math.BigDecimal;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 public class Order {
@@ -45,7 +46,7 @@ public class Order {
     }
 
     public List<OrderItem> getItems() {
-        return items;
+        return Collections.unmodifiableList(items);
     }
 
     public BigDecimal getTax() {
