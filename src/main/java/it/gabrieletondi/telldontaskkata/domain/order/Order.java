@@ -19,9 +19,11 @@ public class Order {
     public Order() {
         orderStatus = new CreatedOrderStatus();
         this.items = new ArrayList<>();
+        this.total = BigDecimal.ZERO;
     }
 
-    public Order(List<OrderItem> items, OrderStatus orderStatus) {
+    public Order(BigDecimal total, List<OrderItem> items, OrderStatus orderStatus) {
+        this.total = total;
         this.items = items;
         this.orderStatus = orderStatus;
     }
