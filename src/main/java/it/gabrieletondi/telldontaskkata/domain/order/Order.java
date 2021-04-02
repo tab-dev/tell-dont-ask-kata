@@ -10,7 +10,6 @@ import java.util.Collections;
 import java.util.List;
 
 public class Order {
-    private BigDecimal total;
     private String currency;
     private List<OrderItem> items;
     private BigDecimal tax;
@@ -20,21 +19,18 @@ public class Order {
     public Order() {
         orderStatus = new CreatedOrderStatus();
         this.items = new ArrayList<>();
-        this.total = BigDecimal.ZERO;
     }
 
-    public Order(BigDecimal total, List<OrderItem> items, OrderStatus orderStatus) {
-        this.total = total;
+    public Order(List<OrderItem> items, OrderStatus orderStatus) {
         this.items = items;
         this.orderStatus = orderStatus;
     }
 
     public BigDecimal getTotal() {
-        return total;
-    }
-
-    public void setTotal(BigDecimal total) {
-        this.total = total;
+        return this.items.stream()
+                .map(orderItem -> orderItem.getTaxedAmount())
+                .reduce((taxedAmount1, taxedAmount2) -> taxedAmount1.add(taxedAmount2))
+                .orElse(BigDecimal.ZERO);
     }
 
     public String getCurrency() {
@@ -69,7 +65,7 @@ public class Order {
         this.id = id;
     }
 
-    public void addOrderItem(OrderItem orderItem){
+    public void addOrderItem(OrderItem orderItem) {
         this.items.add(orderItem);
     }
 
