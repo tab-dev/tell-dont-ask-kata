@@ -1,5 +1,6 @@
 package it.gabrieletondi.telldontaskkata.service.impl;
 
+import it.gabrieletondi.telldontaskkata.domain.Category;
 import it.gabrieletondi.telldontaskkata.domain.Product;
 import it.gabrieletondi.telldontaskkata.domain.order.Order;
 import it.gabrieletondi.telldontaskkata.domain.order.OrderItem;
@@ -13,6 +14,7 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.MockitoJUnitRunner;
 
+import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -53,7 +55,7 @@ public class OrderServiceImplTest {
     @Test
     public void createOrderTest() {
         List<OrderItem> orderItems = new ArrayList<>();
-        orderItems.add(new OrderItem(new Product(), 2));
+        orderItems.add(new OrderItem(new Product("product", BigDecimal.ONE,new Category()), 2));
 
         Order order = orderService.create(orderItems);
 
