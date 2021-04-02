@@ -1,18 +1,13 @@
 package it.gabrieletondi.telldontaskkata.useCase;
 
+import it.gabrieletondi.telldontaskkata.domain.Product;
 import it.gabrieletondi.telldontaskkata.domain.exception.UnknownProductException;
 import it.gabrieletondi.telldontaskkata.domain.order.Order;
 import it.gabrieletondi.telldontaskkata.domain.order.OrderItem;
-import it.gabrieletondi.telldontaskkata.domain.order.status.OrderStatusType;
-import it.gabrieletondi.telldontaskkata.domain.Product;
 import it.gabrieletondi.telldontaskkata.repository.OrderRepository;
 import it.gabrieletondi.telldontaskkata.repository.ProductCatalog;
 
-import java.math.BigDecimal;
-import java.util.ArrayList;
-
-import static java.math.BigDecimal.valueOf;
-import static java.math.RoundingMode.HALF_UP;
+import java.util.Optional;
 
 public class OrderCreationUseCase {
     private final OrderRepository orderRepository;
@@ -24,19 +19,14 @@ public class OrderCreationUseCase {
     }
 
     public void run(SellItemsRequest request) {
-        Order order = new Order(0,"EUR");
+        Order order = new Order(0, "EUR");
 
-        for (SellItemRequest itemRequest : request.getRequests()) {
-            Product product = productCatalog.getByName(itemRequest.getProductName());
-
-            if (product == null) {
-                throw new UnknownProductException();
-            }
-            else {
-                final OrderItem orderItem = new OrderItem(product,itemRequest.getQuantity());
-                order.addOrderItem(orderItem);
-            }
-        }
+        request.getRequests().stream()
+                .map(itemRequest -> new OrderItem(
+                        Optional.ofNullable(productCatalog.getByName(itemRequest.getProductName()))
+                                .orElseThrow(() -> new UnknownProductException()),
+                        itemRequest.getQuantity()))
+                .forEach(orderItem -> order.addOrderItem(orderItem));
 
         orderRepository.save(order);
     }
