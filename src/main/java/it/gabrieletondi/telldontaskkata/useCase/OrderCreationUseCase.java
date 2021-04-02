@@ -44,7 +44,6 @@ public class OrderCreationUseCase {
                 final OrderItem orderItem = new OrderItem();
                 orderItem.setProduct(product);
                 orderItem.setQuantity(itemRequest.getQuantity());
-                orderItem.setTax(taxAmount);
                 order.getItems().add(orderItem);
 
                 order.setTotal(order.getTotal().add(taxedAmount));

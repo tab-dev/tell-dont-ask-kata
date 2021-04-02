@@ -9,7 +9,6 @@ import static java.math.RoundingMode.HALF_UP;
 public class OrderItem {
     private Product product;
     private int quantity;
-    private BigDecimal tax;
 
     public Product getProduct() {
         return product;
@@ -27,15 +26,7 @@ public class OrderItem {
         this.quantity = quantity;
     }
 
-    public BigDecimal getTax() {
-        return tax;
-    }
-
-    public void setTax(BigDecimal tax) {
-        this.tax = tax;
-    }
-
-    public BigDecimal getTaxAmount(){
+    public BigDecimal getTax(){
         return this.product.getUnitaryTax().multiply(BigDecimal.valueOf(this.quantity));
     }
 
