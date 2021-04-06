@@ -51,7 +51,7 @@ public class OrderTest {
         rejectedOrder.approve();
     }
 
-    @Test(expected = ApprovedOrderCannotBeRejectedException.class)
+    @Test(expected = OrderRejectionException.class)
     public void rejectApprovedOrderTest() {
         Order approvedOrder = new Order(UUID.randomUUID().toString(), new ArrayList<>(), new ApprovedOrderStatus(), "EUR");
 

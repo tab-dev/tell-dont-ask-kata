@@ -1,5 +1,6 @@
 package it.gabrieletondi.telldontaskkata.domain.model.order.status;
 
+import it.gabrieletondi.telldontaskkata.domain.exception.OrderRejectionException;
 import it.gabrieletondi.telldontaskkata.domain.exception.OrderShipmentException;
 
 public class ShippedOrderStatus implements OrderStatus {
@@ -12,7 +13,7 @@ public class ShippedOrderStatus implements OrderStatus {
 
     @Override
     public OrderStatus reject() {
-        throw new OrderShipmentException("Shipped orders cannot be rejected.");
+        throw new OrderRejectionException("Shipped orders cannot be rejected.");
     }
 
     @Override
