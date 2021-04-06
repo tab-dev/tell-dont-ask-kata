@@ -1,7 +1,6 @@
 package it.gabrieletondi.telldontaskkata.domain.model.order.status;
 
-import it.gabrieletondi.telldontaskkata.domain.exception.OrderCannotBeShippedTwiceException;
-import it.gabrieletondi.telldontaskkata.domain.exception.ShippedOrdersCannotBeChangedException;
+import it.gabrieletondi.telldontaskkata.domain.exception.OrderShipmentException;
 
 public class ShippedOrderStatus implements OrderStatus {
 
@@ -13,16 +12,16 @@ public class ShippedOrderStatus implements OrderStatus {
 
     @Override
     public OrderStatus reject() {
-        throw new ShippedOrdersCannotBeChangedException();
+        throw new OrderShipmentException("Shipped orders cannot be rejected.");
     }
 
     @Override
     public OrderStatus approve() {
-        throw new ShippedOrdersCannotBeChangedException();
+        throw new OrderShipmentException("Shipped orders cannot be approved.");
     }
 
     @Override
     public OrderStatus ship() {
-        throw new OrderCannotBeShippedTwiceException();
+        throw new OrderShipmentException("Shipped orders cannot be shipped again.");
     }
 }

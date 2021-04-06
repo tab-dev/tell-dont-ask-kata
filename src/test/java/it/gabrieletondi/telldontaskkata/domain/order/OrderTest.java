@@ -58,14 +58,14 @@ public class OrderTest {
         approvedOrder.reject();
     }
 
-    @Test(expected = OrderCannotBeShippedException.class)
+    @Test(expected = OrderShipmentException.class)
     public void shipRejectedOrderTest() {
         Order rejectedOrder = new Order(UUID.randomUUID().toString(), new ArrayList<>(), new RejectedOrderStatus(), "EUR");
 
         rejectedOrder.ship();
     }
 
-    @Test(expected = OrderCannotBeShippedTwiceException.class)
+    @Test(expected = OrderShipmentException.class)
     public void shipShippedOrderTest() {
         Order shippedOrder = new Order(UUID.randomUUID().toString(), new ArrayList<>(), new ShippedOrderStatus(), "EUR");
 

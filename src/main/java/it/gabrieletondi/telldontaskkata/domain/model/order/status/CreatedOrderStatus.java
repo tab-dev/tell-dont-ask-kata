@@ -1,6 +1,6 @@
 package it.gabrieletondi.telldontaskkata.domain.model.order.status;
 
-import it.gabrieletondi.telldontaskkata.domain.exception.OrderCannotBeShippedException;
+import it.gabrieletondi.telldontaskkata.domain.exception.OrderShipmentException;
 
 public class CreatedOrderStatus implements OrderStatus {
 
@@ -21,6 +21,6 @@ public class CreatedOrderStatus implements OrderStatus {
 
     @Override
     public OrderStatus ship() {
-        throw new OrderCannotBeShippedException();
+        throw new OrderShipmentException("Orders cannot be shipped until they've been approved.");
     }
 }

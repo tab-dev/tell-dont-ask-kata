@@ -5,9 +5,9 @@ import it.gabrieletondi.telldontaskkata.domain.model.Product;
 import it.gabrieletondi.telldontaskkata.domain.model.order.Order;
 import it.gabrieletondi.telldontaskkata.domain.model.order.OrderItem;
 import it.gabrieletondi.telldontaskkata.domain.model.order.status.ApprovedOrderStatus;
+import it.gabrieletondi.telldontaskkata.domain.service.ShipmentService;
 import it.gabrieletondi.telldontaskkata.domain.service.impl.OrderServiceImpl;
 import it.gabrieletondi.telldontaskkata.repository.OrderRepository;
-import it.gabrieletondi.telldontaskkata.domain.service.ShipmentService;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -22,7 +22,7 @@ import java.util.UUID;
 
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertNotNull;
-import static org.mockito.ArgumentMatchers.*;
+import static org.mockito.ArgumentMatchers.anyString;
 import static org.mockito.Mockito.doReturn;
 
 @RunWith(MockitoJUnitRunner.class)
@@ -57,7 +57,7 @@ public class OrderServiceImplTest {
     @Test
     public void createOrderTest() {
         List<OrderItem> orderItems = new ArrayList<>();
-        orderItems.add(new OrderItem(new Product("product", BigDecimal.ONE,new Category("food",BigDecimal.valueOf(10))), 2));
+        orderItems.add(new OrderItem(new Product("product", BigDecimal.ONE, new Category("food", BigDecimal.valueOf(10))), 2));
 
         Order order = orderService.create(orderItems);
 
@@ -67,7 +67,7 @@ public class OrderServiceImplTest {
 
     @Test
     public void shipOrderTest() {
-        Order shippableOrder = new Order(UUID.randomUUID().toString(),new ArrayList<>(),new ApprovedOrderStatus(),"EUR");
+        Order shippableOrder = new Order(UUID.randomUUID().toString(), new ArrayList<>(), new ApprovedOrderStatus(), "EUR");
         doReturn(shippableOrder).when(orderRepository).getById(anyString());
 
         orderService.ship(UUID.randomUUID().toString());
