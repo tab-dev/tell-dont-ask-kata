@@ -18,6 +18,7 @@ import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
 
+import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertNotNull;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.ArgumentMatchers.anyInt;
@@ -60,6 +61,7 @@ public class OrderServiceImplTest {
         Order order = orderService.create(orderItems);
 
         assertNotNull(order);
+        assertFalse(order.getItems().isEmpty());
     }
 
     @Test
