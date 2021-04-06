@@ -1,7 +1,7 @@
 package it.gabrieletondi.telldontaskkata.domain.service;
 
-import it.gabrieletondi.telldontaskkata.domain.order.Order;
-import it.gabrieletondi.telldontaskkata.domain.order.OrderItem;
+import it.gabrieletondi.telldontaskkata.domain.model.order.Order;
+import it.gabrieletondi.telldontaskkata.domain.model.order.OrderItem;
 
 import java.util.List;
 

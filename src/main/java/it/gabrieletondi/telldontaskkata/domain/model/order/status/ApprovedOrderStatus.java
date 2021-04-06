@@ -1,4 +1,4 @@
-package it.gabrieletondi.telldontaskkata.domain.order.status;
+package it.gabrieletondi.telldontaskkata.domain.model.order.status;
 
 import it.gabrieletondi.telldontaskkata.domain.exception.ApprovedOrderCannotBeRejectedException;
 

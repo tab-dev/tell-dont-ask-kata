@@ -1,22 +1,22 @@
-package it.gabrieletondi.telldontaskkata.domain.order.status;
+package it.gabrieletondi.telldontaskkata.domain.model.order.status;
 
 import it.gabrieletondi.telldontaskkata.domain.exception.OrderCannotBeShippedException;
-import it.gabrieletondi.telldontaskkata.domain.exception.RejectedOrderCannotBeApprovedException;
 
-public class RejectedOrderStatus implements OrderStatus {
+public class CreatedOrderStatus implements OrderStatus {
+
     @Override
     public OrderStatusType getStatusType() {
-        return OrderStatusType.REJECTED;
+        return OrderStatusType.CREATED;
     }
 
     @Override
     public OrderStatus reject() {
-        return this;
+        return new RejectedOrderStatus();
     }
 
     @Override
     public OrderStatus approve() {
-        throw new RejectedOrderCannotBeApprovedException();
+        return new ApprovedOrderStatus();
     }
 
     @Override

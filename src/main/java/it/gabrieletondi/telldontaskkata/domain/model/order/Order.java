@@ -1,8 +1,8 @@
-package it.gabrieletondi.telldontaskkata.domain.order;
+package it.gabrieletondi.telldontaskkata.domain.model.order;
 
-import it.gabrieletondi.telldontaskkata.domain.order.status.CreatedOrderStatus;
-import it.gabrieletondi.telldontaskkata.domain.order.status.OrderStatus;
-import it.gabrieletondi.telldontaskkata.domain.order.status.OrderStatusType;
+import it.gabrieletondi.telldontaskkata.domain.model.order.status.CreatedOrderStatus;
+import it.gabrieletondi.telldontaskkata.domain.model.order.status.OrderStatus;
+import it.gabrieletondi.telldontaskkata.domain.model.order.status.OrderStatusType;
 
 import java.math.BigDecimal;
 import java.util.ArrayList;

@@ -2,10 +2,11 @@ package it.gabrieletondi.telldontaskkata.domain.order;
 
 
 import it.gabrieletondi.telldontaskkata.domain.exception.*;
-import it.gabrieletondi.telldontaskkata.domain.order.status.ApprovedOrderStatus;
-import it.gabrieletondi.telldontaskkata.domain.order.status.OrderStatusType;
-import it.gabrieletondi.telldontaskkata.domain.order.status.RejectedOrderStatus;
-import it.gabrieletondi.telldontaskkata.domain.order.status.ShippedOrderStatus;
+import it.gabrieletondi.telldontaskkata.domain.model.order.Order;
+import it.gabrieletondi.telldontaskkata.domain.model.order.status.ApprovedOrderStatus;
+import it.gabrieletondi.telldontaskkata.domain.model.order.status.OrderStatusType;
+import it.gabrieletondi.telldontaskkata.domain.model.order.status.RejectedOrderStatus;
+import it.gabrieletondi.telldontaskkata.domain.model.order.status.ShippedOrderStatus;
 import org.junit.Test;
 
 import java.util.ArrayList;

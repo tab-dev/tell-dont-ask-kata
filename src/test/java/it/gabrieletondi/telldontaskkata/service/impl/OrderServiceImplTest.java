@@ -1,10 +1,10 @@
 package it.gabrieletondi.telldontaskkata.service.impl;
 
-import it.gabrieletondi.telldontaskkata.domain.Category;
-import it.gabrieletondi.telldontaskkata.domain.Product;
-import it.gabrieletondi.telldontaskkata.domain.order.Order;
-import it.gabrieletondi.telldontaskkata.domain.order.OrderItem;
-import it.gabrieletondi.telldontaskkata.domain.order.status.ApprovedOrderStatus;
+import it.gabrieletondi.telldontaskkata.domain.model.Category;
+import it.gabrieletondi.telldontaskkata.domain.model.Product;
+import it.gabrieletondi.telldontaskkata.domain.model.order.Order;
+import it.gabrieletondi.telldontaskkata.domain.model.order.OrderItem;
+import it.gabrieletondi.telldontaskkata.domain.model.order.status.ApprovedOrderStatus;
 import it.gabrieletondi.telldontaskkata.domain.service.impl.OrderServiceImpl;
 import it.gabrieletondi.telldontaskkata.repository.OrderRepository;
 import it.gabrieletondi.telldontaskkata.domain.service.ShipmentService;

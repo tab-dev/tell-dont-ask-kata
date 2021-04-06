@@ -1,7 +1,7 @@
 package it.gabrieletondi.telldontaskkata.controller;
 
-import it.gabrieletondi.telldontaskkata.domain.Category;
-import it.gabrieletondi.telldontaskkata.domain.Product;
+import it.gabrieletondi.telldontaskkata.domain.model.Category;
+import it.gabrieletondi.telldontaskkata.domain.model.Product;
 import it.gabrieletondi.telldontaskkata.domain.exception.UnknownProductException;
 import it.gabrieletondi.telldontaskkata.repository.ProductCatalog;
 import it.gabrieletondi.telldontaskkata.domain.service.OrderService;

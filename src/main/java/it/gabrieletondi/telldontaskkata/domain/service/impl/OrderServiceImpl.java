@@ -1,7 +1,7 @@
 package it.gabrieletondi.telldontaskkata.domain.service.impl;
 
-import it.gabrieletondi.telldontaskkata.domain.order.Order;
-import it.gabrieletondi.telldontaskkata.domain.order.OrderItem;
+import it.gabrieletondi.telldontaskkata.domain.model.order.Order;
+import it.gabrieletondi.telldontaskkata.domain.model.order.OrderItem;
 import it.gabrieletondi.telldontaskkata.repository.OrderRepository;
 import it.gabrieletondi.telldontaskkata.domain.service.OrderService;
 import it.gabrieletondi.telldontaskkata.domain.service.ShipmentService;

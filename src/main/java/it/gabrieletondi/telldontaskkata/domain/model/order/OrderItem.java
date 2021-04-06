@@ -1,6 +1,6 @@
-package it.gabrieletondi.telldontaskkata.domain.order;
+package it.gabrieletondi.telldontaskkata.domain.model.order;
 
-import it.gabrieletondi.telldontaskkata.domain.Product;
+import it.gabrieletondi.telldontaskkata.domain.model.Product;
 
 import java.math.BigDecimal;
 

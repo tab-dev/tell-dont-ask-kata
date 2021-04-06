@@ -1,6 +1,4 @@
-package it.gabrieletondi.telldontaskkata.domain.order.status;
-
-import it.gabrieletondi.telldontaskkata.domain.order.Order;
+package it.gabrieletondi.telldontaskkata.domain.model.order.status;
 
 public interface OrderStatus {
 
