@@ -4,7 +4,7 @@ import it.gabrieletondi.telldontaskkata.domain.Category;
 import it.gabrieletondi.telldontaskkata.domain.Product;
 import it.gabrieletondi.telldontaskkata.domain.exception.UnknownProductException;
 import it.gabrieletondi.telldontaskkata.repository.ProductCatalog;
-import it.gabrieletondi.telldontaskkata.service.OrderService;
+import it.gabrieletondi.telldontaskkata.domain.service.OrderService;
 import it.gabrieletondi.telldontaskkata.useCase.SellItemRequest;
 import it.gabrieletondi.telldontaskkata.useCase.SellItemsRequest;
 import org.junit.Before;

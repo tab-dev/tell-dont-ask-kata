@@ -1,4 +1,4 @@
-package it.gabrieletondi.telldontaskkata.service;
+package it.gabrieletondi.telldontaskkata.domain.service;
 
 import it.gabrieletondi.telldontaskkata.domain.order.Order;
 

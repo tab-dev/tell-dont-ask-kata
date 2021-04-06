@@ -1,14 +1,12 @@
-package it.gabrieletondi.telldontaskkata.service.impl;
+package it.gabrieletondi.telldontaskkata.domain.service.impl;
 
-import it.gabrieletondi.telldontaskkata.domain.exception.UnknownProductException;
 import it.gabrieletondi.telldontaskkata.domain.order.Order;
 import it.gabrieletondi.telldontaskkata.domain.order.OrderItem;
 import it.gabrieletondi.telldontaskkata.repository.OrderRepository;
-import it.gabrieletondi.telldontaskkata.service.OrderService;
-import it.gabrieletondi.telldontaskkata.service.ShipmentService;
+import it.gabrieletondi.telldontaskkata.domain.service.OrderService;
+import it.gabrieletondi.telldontaskkata.domain.service.ShipmentService;
 
 import java.util.List;
-import java.util.Optional;
 
 public class OrderServiceImpl implements OrderService {
 

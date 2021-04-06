@@ -4,7 +4,7 @@ import it.gabrieletondi.telldontaskkata.domain.exception.UnknownProductException
 import it.gabrieletondi.telldontaskkata.domain.order.Order;
 import it.gabrieletondi.telldontaskkata.domain.order.OrderItem;
 import it.gabrieletondi.telldontaskkata.repository.ProductCatalog;
-import it.gabrieletondi.telldontaskkata.service.OrderService;
+import it.gabrieletondi.telldontaskkata.domain.service.OrderService;
 import it.gabrieletondi.telldontaskkata.useCase.SellItemsRequest;
 
 import java.util.List;
