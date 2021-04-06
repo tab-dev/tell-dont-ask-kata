@@ -16,6 +16,7 @@ import org.mockito.junit.MockitoJUnitRunner;
 
 import java.math.BigDecimal;
 import java.util.ArrayList;
+import java.util.UUID;
 
 import static org.mockito.Mockito.doReturn;
 
@@ -74,16 +75,16 @@ public class OrderControllerTest {
 
     @Test
     public void approvedExistingOrder() throws Exception {
-        orderController.approve(1);
+        orderController.approve(UUID.randomUUID().toString());
     }
 
     @Test
     public void rejectedExistingOrder() throws Exception {
-        orderController.reject(1);
+        orderController.reject(UUID.randomUUID().toString());
     }
 
     @Test
     public void shipApprovedOrder() throws Exception {
-        orderController.ship(1);
+        orderController.ship(UUID.randomUUID().toString());
     }
 }

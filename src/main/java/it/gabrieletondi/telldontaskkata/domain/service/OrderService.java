@@ -7,11 +7,11 @@ import java.util.List;
 
 public interface OrderService {
 
-    void approve(int id);
+    void approve(String id);
 
     Order create(List<OrderItem> orderItems);
 
-    void reject(int id);
+    void reject(String id);
 
-    void ship(int id);
+    void ship(String id);
 }

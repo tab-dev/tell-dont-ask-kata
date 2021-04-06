@@ -20,7 +20,7 @@ public class OrderServiceImpl implements OrderService {
     }
 
     @Override
-    public void approve(int id) {
+    public void approve(String id) {
         final Order order = orderRepository.getById(id);
 
         order.approve();
@@ -41,7 +41,7 @@ public class OrderServiceImpl implements OrderService {
     }
 
     @Override
-    public void reject(int id) {
+    public void reject(String id) {
         final Order order = orderRepository.getById(id);
 
         order.reject();
@@ -50,7 +50,7 @@ public class OrderServiceImpl implements OrderService {
     }
 
     @Override
-    public void ship(int id) {
+    public void ship(String id) {
         final Order order = orderRepository.getById(id);
 
         shipmentService.ship(order);

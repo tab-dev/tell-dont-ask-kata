@@ -32,15 +32,15 @@ public class OrderController {
         return orderService.create(orderItems);
     }
 
-    public void approve(int orderId){
+    public void approve(String orderId){
         orderService.approve(orderId);
     }
 
-    public void reject(int orderId){
+    public void reject(String orderId){
         orderService.reject(orderId);
     }
 
-    public void ship(int orderId){
+    public void ship(String orderId){
         orderService.ship(orderId);
     }
 }

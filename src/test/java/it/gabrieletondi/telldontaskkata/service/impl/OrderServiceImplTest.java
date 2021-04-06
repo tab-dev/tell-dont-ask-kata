@@ -22,8 +22,7 @@ import java.util.UUID;
 
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertNotNull;
-import static org.mockito.ArgumentMatchers.any;
-import static org.mockito.ArgumentMatchers.anyInt;
+import static org.mockito.ArgumentMatchers.*;
 import static org.mockito.Mockito.doReturn;
 
 @RunWith(MockitoJUnitRunner.class)
@@ -41,18 +40,18 @@ public class OrderServiceImplTest {
     @Before
     public void init() {
         Order initialOrder = new Order(UUID.randomUUID().toString(), "EUR");
-        doReturn(initialOrder).when(orderRepository).getById(anyInt());
+        doReturn(initialOrder).when(orderRepository).getById(anyString());
     }
 
     @Test
     public void approvedExistingOrderTest() throws Exception {
 
-        orderService.approve(1);
+        orderService.approve(UUID.randomUUID().toString());
     }
 
     @Test
     public void rejectedExistingOrderTest() throws Exception {
-        orderService.reject(1);
+        orderService.reject(UUID.randomUUID().toString());
     }
 
     @Test
@@ -69,8 +68,8 @@ public class OrderServiceImplTest {
     @Test
     public void shipOrderTest() {
         Order shippableOrder = new Order(UUID.randomUUID().toString(),new ArrayList<>(),new ApprovedOrderStatus(),"EUR");
-        doReturn(shippableOrder).when(orderRepository).getById(anyInt());
+        doReturn(shippableOrder).when(orderRepository).getById(anyString());
 
-        orderService.ship(1);
+        orderService.ship(UUID.randomUUID().toString());
     }
 }
