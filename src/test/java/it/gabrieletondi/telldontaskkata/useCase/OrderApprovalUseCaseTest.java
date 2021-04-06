@@ -6,105 +6,41 @@ import it.gabrieletondi.telldontaskkata.domain.exception.ShippedOrdersCannotBeCh
 import it.gabrieletondi.telldontaskkata.domain.order.Order;
 import it.gabrieletondi.telldontaskkata.domain.order.status.OrderStatusType;
 import it.gabrieletondi.telldontaskkata.doubles.TestOrderRepository;
+import it.gabrieletondi.telldontaskkata.service.OrderService;
 import org.junit.Test;
+import org.junit.runner.RunWith;
+import org.mockito.InjectMocks;
+import org.mockito.Mock;
+import org.mockito.junit.MockitoJUnitRunner;
 
 import static org.hamcrest.Matchers.is;
 import static org.hamcrest.Matchers.nullValue;
 import static org.junit.Assert.assertThat;
 
+@RunWith(MockitoJUnitRunner.class)
 public class OrderApprovalUseCaseTest {
-    private final TestOrderRepository orderRepository = new TestOrderRepository();
-    private final OrderApprovalUseCase useCase = new OrderApprovalUseCase(orderRepository);
+    @InjectMocks
+    private OrderApprovalUseCase useCase;
+
+    @Mock
+    private OrderService orderService;
 
     @Test
     public void approvedExistingOrder() throws Exception {
-        Order initialOrder = new Order(1,"EUR");
-        orderRepository.addOrder(initialOrder);
-
         OrderApprovalRequest request = new OrderApprovalRequest();
         request.setOrderId(1);
         request.setApproved(true);
 
         useCase.run(request);
-
-        final Order savedOrder = orderRepository.getSavedOrder();
-        assertThat(savedOrder.getStatusType(), is(OrderStatusType.APPROVED));
     }
 
     @Test
     public void rejectedExistingOrder() throws Exception {
-        Order initialOrder = new Order(1,"EUR");
-        orderRepository.addOrder(initialOrder);
-
         OrderApprovalRequest request = new OrderApprovalRequest();
         request.setOrderId(1);
         request.setApproved(false);
 
         useCase.run(request);
-
-        final Order savedOrder = orderRepository.getSavedOrder();
-        assertThat(savedOrder.getStatusType(), is(OrderStatusType.REJECTED));
     }
 
-    @Test(expected = RejectedOrderCannotBeApprovedException.class)
-    public void cannotApproveRejectedOrder() throws Exception {
-        Order initialOrder = new Order(1,"EUR");
-        orderRepository.addOrder(initialOrder);
-        initialOrder.reject();
-
-        OrderApprovalRequest request = new OrderApprovalRequest();
-        request.setOrderId(1);
-        request.setApproved(true);
-
-        useCase.run(request);
-
-        assertThat(orderRepository.getSavedOrder(), is(nullValue()));
-    }
-
-    @Test(expected = ApprovedOrderCannotBeRejectedException.class)
-    public void cannotRejectApprovedOrder() throws Exception {
-        Order initialOrder = new Order(1,"EUR");
-        orderRepository.addOrder(initialOrder);
-        initialOrder.approve();
-
-        OrderApprovalRequest request = new OrderApprovalRequest();
-        request.setOrderId(1);
-        request.setApproved(false);
-
-        useCase.run(request);
-
-        assertThat(orderRepository.getSavedOrder(), is(nullValue()));
-    }
-
-    @Test(expected = ShippedOrdersCannotBeChangedException.class)
-    public void shippedOrdersCannotBeApproved() throws Exception {
-        Order initialOrder = new Order(1,"EUR");
-        orderRepository.addOrder(initialOrder);
-        initialOrder.approve();
-        initialOrder.ship();
-
-        OrderApprovalRequest request = new OrderApprovalRequest();
-        request.setOrderId(1);
-        request.setApproved(true);
-
-        useCase.run(request);
-
-        assertThat(orderRepository.getSavedOrder(), is(nullValue()));
-    }
-
-    @Test(expected = ShippedOrdersCannotBeChangedException.class)
-    public void shippedOrdersCannotBeRejected() throws Exception {
-        Order initialOrder = new Order(1,"EUR");
-        orderRepository.addOrder(initialOrder);
-        initialOrder.approve();
-        initialOrder.ship();
-
-        OrderApprovalRequest request = new OrderApprovalRequest();
-        request.setOrderId(1);
-        request.setApproved(false);
-
-        useCase.run(request);
-
-        assertThat(orderRepository.getSavedOrder(), is(nullValue()));
-    }
 }

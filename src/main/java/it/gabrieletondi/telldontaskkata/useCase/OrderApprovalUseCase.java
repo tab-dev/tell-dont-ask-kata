@@ -6,23 +6,21 @@ import it.gabrieletondi.telldontaskkata.domain.exception.ShippedOrdersCannotBeCh
 import it.gabrieletondi.telldontaskkata.domain.order.Order;
 import it.gabrieletondi.telldontaskkata.domain.order.status.OrderStatusType;
 import it.gabrieletondi.telldontaskkata.repository.OrderRepository;
+import it.gabrieletondi.telldontaskkata.service.OrderService;
 
 public class OrderApprovalUseCase {
-    private final OrderRepository orderRepository;
+    private OrderService orderService;
 
-    public OrderApprovalUseCase(OrderRepository orderRepository) {
-        this.orderRepository = orderRepository;
+    public OrderApprovalUseCase(OrderService orderService) {
+        this.orderService = orderService;
     }
 
     public void run(OrderApprovalRequest request) {
-        final Order order = orderRepository.getById(request.getOrderId());
 
         if (request.isApproved()) {
-            order.approve();
+            orderService.approve(request.getOrderId());
         } else {
-            order.reject();
+            orderService.reject(request.getOrderId());
         }
-
-        orderRepository.save(order);
     }
 }
