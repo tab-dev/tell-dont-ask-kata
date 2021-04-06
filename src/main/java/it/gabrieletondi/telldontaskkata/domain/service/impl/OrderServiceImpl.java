@@ -7,6 +7,7 @@ import it.gabrieletondi.telldontaskkata.domain.service.OrderService;
 import it.gabrieletondi.telldontaskkata.domain.service.ShipmentService;
 
 import java.util.List;
+import java.util.UUID;
 
 public class OrderServiceImpl implements OrderService {
 
@@ -29,7 +30,7 @@ public class OrderServiceImpl implements OrderService {
 
     @Override
     public Order create(List<OrderItem> orderItems) {
-        Order order = new Order(0, "EUR");
+        Order order = new Order(UUID.randomUUID().toString(), "EUR");
 
         orderItems.stream()
                 .forEach(orderItem -> order.addOrderItem(orderItem));

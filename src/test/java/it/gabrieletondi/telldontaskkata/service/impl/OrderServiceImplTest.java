@@ -18,6 +18,7 @@ import org.mockito.junit.MockitoJUnitRunner;
 import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.UUID;
 
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertNotNull;
@@ -39,7 +40,7 @@ public class OrderServiceImplTest {
 
     @Before
     public void init() {
-        Order initialOrder = new Order(1, "EUR");
+        Order initialOrder = new Order(UUID.randomUUID().toString(), "EUR");
         doReturn(initialOrder).when(orderRepository).getById(anyInt());
     }
 
@@ -67,7 +68,7 @@ public class OrderServiceImplTest {
 
     @Test
     public void shipOrderTest() {
-        Order shippableOrder = new Order(1,new ArrayList<>(),new ApprovedOrderStatus(),"EUR");
+        Order shippableOrder = new Order(UUID.randomUUID().toString(),new ArrayList<>(),new ApprovedOrderStatus(),"EUR");
         doReturn(shippableOrder).when(orderRepository).getById(anyInt());
 
         orderService.ship(1);

@@ -10,6 +10,7 @@ import it.gabrieletondi.telldontaskkata.domain.model.order.status.ShippedOrderSt
 import org.junit.Test;
 
 import java.util.ArrayList;
+import java.util.UUID;
 
 import static org.junit.Assert.assertEquals;
 
@@ -18,7 +19,7 @@ public class OrderTest {
 
     @Test
     public void approveNewOrderTest() {
-        Order order = new Order(1, "EUR");
+        Order order = new Order(UUID.randomUUID().toString(), "EUR");
 
         order.approve();
 
@@ -27,7 +28,7 @@ public class OrderTest {
 
     @Test
     public void rejectNewOrderTest() {
-        Order order = new Order(1, "EUR");
+        Order order = new Order(UUID.randomUUID().toString(), "EUR");
 
         order.reject();
 
@@ -36,7 +37,7 @@ public class OrderTest {
 
     @Test
     public void shipApprovedOrderTest() {
-        Order approvedOrder = new Order(1, new ArrayList<>(), new ApprovedOrderStatus(), "EUR");
+        Order approvedOrder = new Order(UUID.randomUUID().toString(), new ArrayList<>(), new ApprovedOrderStatus(), "EUR");
 
         approvedOrder.ship();
 
@@ -45,28 +46,28 @@ public class OrderTest {
 
     @Test(expected = RejectedOrderCannotBeApprovedException.class)
     public void approveRejectedOrderTest() {
-        Order rejectedOrder = new Order(1, new ArrayList<>(), new RejectedOrderStatus(), "EUR");
+        Order rejectedOrder = new Order(UUID.randomUUID().toString(), new ArrayList<>(), new RejectedOrderStatus(), "EUR");
 
         rejectedOrder.approve();
     }
 
     @Test(expected = ApprovedOrderCannotBeRejectedException.class)
     public void rejectApprovedOrderTest() {
-        Order approvedOrder = new Order(1, new ArrayList<>(), new ApprovedOrderStatus(), "EUR");
+        Order approvedOrder = new Order(UUID.randomUUID().toString(), new ArrayList<>(), new ApprovedOrderStatus(), "EUR");
 
         approvedOrder.reject();
     }
 
     @Test(expected = OrderCannotBeShippedException.class)
     public void shipRejectedOrderTest() {
-        Order rejectedOrder = new Order(1, new ArrayList<>(), new RejectedOrderStatus(), "EUR");
+        Order rejectedOrder = new Order(UUID.randomUUID().toString(), new ArrayList<>(), new RejectedOrderStatus(), "EUR");
 
         rejectedOrder.ship();
     }
 
     @Test(expected = OrderCannotBeShippedTwiceException.class)
     public void shipShippedOrderTest() {
-        Order shippedOrder = new Order(1, new ArrayList<>(), new ShippedOrderStatus(), "EUR");
+        Order shippedOrder = new Order(UUID.randomUUID().toString(), new ArrayList<>(), new ShippedOrderStatus(), "EUR");
 
         shippedOrder.ship();
     }

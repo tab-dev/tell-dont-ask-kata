@@ -10,26 +10,26 @@ import java.util.Collections;
 import java.util.List;
 
 public class Order {
-    private int id;
+    private String id;
     private List<OrderItem> items;
     private OrderStatus orderStatus;
     private String currency;
 
-    public Order(int id, String currency) {
+    public Order(String id, String currency) {
         this.id = id;
         this.currency = currency;
         this.orderStatus = new CreatedOrderStatus();
         this.items = new ArrayList<>();
     }
 
-    public Order(int id, List<OrderItem> items, OrderStatus orderStatus, String currency) {
+    public Order(String id, List<OrderItem> items, OrderStatus orderStatus, String currency) {
         this.id = id;
         this.items = items;
         this.orderStatus = orderStatus;
         this.currency = currency;
     }
 
-    public int getId() {
+    public String getId() {
         return id;
     }
 
