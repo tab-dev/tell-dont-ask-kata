@@ -1,7 +1,7 @@
 package it.gabrieletondi.telldontaskkata.domain.model.order.status;
 
+import it.gabrieletondi.telldontaskkata.domain.exception.OrderApprovalException;
 import it.gabrieletondi.telldontaskkata.domain.exception.OrderShipmentException;
-import it.gabrieletondi.telldontaskkata.domain.exception.RejectedOrderCannotBeApprovedException;
 
 public class RejectedOrderStatus implements OrderStatus {
     @Override
@@ -16,7 +16,7 @@ public class RejectedOrderStatus implements OrderStatus {
 
     @Override
     public OrderStatus approve() {
-        throw new RejectedOrderCannotBeApprovedException();
+        throw new OrderApprovalException("Rejected orders cannot be approved.");
     }
 
     @Override

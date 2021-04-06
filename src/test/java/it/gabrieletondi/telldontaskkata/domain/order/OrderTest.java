@@ -44,7 +44,7 @@ public class OrderTest {
         assertEquals(OrderStatusType.SHIPPED, approvedOrder.getStatusType());
     }
 
-    @Test(expected = RejectedOrderCannotBeApprovedException.class)
+    @Test(expected = OrderApprovalException.class)
     public void approveRejectedOrderTest() {
         Order rejectedOrder = new Order(UUID.randomUUID().toString(), new ArrayList<>(), new RejectedOrderStatus(), "EUR");
 
