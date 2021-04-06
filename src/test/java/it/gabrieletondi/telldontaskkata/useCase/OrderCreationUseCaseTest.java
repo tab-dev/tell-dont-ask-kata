@@ -6,9 +6,14 @@ import it.gabrieletondi.telldontaskkata.domain.exception.UnknownProductException
 import it.gabrieletondi.telldontaskkata.domain.order.Order;
 import it.gabrieletondi.telldontaskkata.domain.order.status.OrderStatusType;
 import it.gabrieletondi.telldontaskkata.doubles.InMemoryProductCatalog;
-import it.gabrieletondi.telldontaskkata.doubles.TestOrderRepository;
 import it.gabrieletondi.telldontaskkata.repository.ProductCatalog;
+import it.gabrieletondi.telldontaskkata.service.OrderService;
+import org.junit.Before;
 import org.junit.Test;
+import org.junit.runner.RunWith;
+import org.mockito.InjectMocks;
+import org.mockito.Mock;
+import org.mockito.junit.MockitoJUnitRunner;
 
 import java.math.BigDecimal;
 import java.util.ArrayList;
@@ -17,21 +22,31 @@ import java.util.Arrays;
 import static org.hamcrest.Matchers.hasSize;
 import static org.hamcrest.Matchers.is;
 import static org.junit.Assert.assertThat;
+import static org.mockito.Mockito.doReturn;
 
+@RunWith(MockitoJUnitRunner.class)
 public class OrderCreationUseCaseTest {
-    private final TestOrderRepository orderRepository = new TestOrderRepository();
-    private Category food = new Category("food",BigDecimal.valueOf(10));
 
-    private final ProductCatalog productCatalog = new InMemoryProductCatalog(
-            Arrays.asList(
-                    new Product("salad",
-                            new BigDecimal("3.56"),
-                            food),
-                    new Product("tomato",
-                            new BigDecimal("4.65"),
-                            food)
-            ));
-    private final OrderCreationUseCase useCase = new OrderCreationUseCase(orderRepository, productCatalog);
+
+    @InjectMocks
+    private OrderCreationUseCase useCase;
+
+    @Mock
+    private OrderService orderService;
+
+    @Mock
+    private ProductCatalog productCatalog;
+
+    @Before
+    public void setUp() throws Exception {
+        Category food = new Category("food", BigDecimal.valueOf(10));
+        doReturn(new Product("salad",
+                new BigDecimal("3.56"),
+                food)).when(productCatalog).getByName("salad");
+        doReturn(new Product("tomato",
+                new BigDecimal("4.65"),
+                food)).when(productCatalog).getByName("tomato");
+    }
 
     @Test
     public void sellMultipleItems() throws Exception {
@@ -50,22 +65,6 @@ public class OrderCreationUseCaseTest {
 
         useCase.run(request);
 
-        final Order insertedOrder = orderRepository.getSavedOrder();
-        assertThat(insertedOrder.getStatusType(), is(OrderStatusType.CREATED));
-        assertThat(insertedOrder.getTotal(), is(new BigDecimal("23.20")));
-        assertThat(insertedOrder.getTax(), is(new BigDecimal("2.13")));
-        assertThat(insertedOrder.getCurrency(), is("EUR"));
-        assertThat(insertedOrder.getItems(), hasSize(2));
-        assertThat(insertedOrder.getItems().get(0).getProduct().getName(), is("salad"));
-        assertThat(insertedOrder.getItems().get(0).getProduct().getPrice(), is(new BigDecimal("3.56")));
-        assertThat(insertedOrder.getItems().get(0).getQuantity(), is(2));
-        assertThat(insertedOrder.getItems().get(0).getTaxedAmount(), is(new BigDecimal("7.84")));
-        assertThat(insertedOrder.getItems().get(0).getTax(), is(new BigDecimal("0.72")));
-        assertThat(insertedOrder.getItems().get(1).getProduct().getName(), is("tomato"));
-        assertThat(insertedOrder.getItems().get(1).getProduct().getPrice(), is(new BigDecimal("4.65")));
-        assertThat(insertedOrder.getItems().get(1).getQuantity(), is(3));
-        assertThat(insertedOrder.getItems().get(1).getTaxedAmount(), is(new BigDecimal("15.36")));
-        assertThat(insertedOrder.getItems().get(1).getTax(), is(new BigDecimal("1.41")));
     }
 
     @Test(expected = UnknownProductException.class)
