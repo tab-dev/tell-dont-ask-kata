@@ -3,6 +3,7 @@ package it.gabrieletondi.telldontaskkata.controller;
 import it.gabrieletondi.telldontaskkata.domain.exception.UnknownProductException;
 import it.gabrieletondi.telldontaskkata.domain.model.order.Order;
 import it.gabrieletondi.telldontaskkata.domain.model.order.OrderItem;
+import it.gabrieletondi.telldontaskkata.domain.service.ProductService;
 import it.gabrieletondi.telldontaskkata.repository.ProductCatalog;
 import it.gabrieletondi.telldontaskkata.domain.service.OrderService;
 import it.gabrieletondi.telldontaskkata.controller.model.SellItemsRequest;
@@ -14,18 +15,17 @@ import java.util.stream.Collectors;
 public class OrderController {
 
     private final OrderService orderService;
-    private final ProductCatalog productCatalog;
+    private final ProductService productService;
 
-    public OrderController(OrderService orderService, ProductCatalog productCatalog) {
+    public OrderController(OrderService orderService, ProductService productService) {
         this.orderService = orderService;
-        this.productCatalog = productCatalog;
+        this.productService = productService;
     }
 
     public Order create(SellItemsRequest request){
         List<OrderItem> orderItems = request.getRequests().stream()
                 .map(itemRequest -> new OrderItem(
-                        Optional.ofNullable(productCatalog.getByName(itemRequest.getProductName()))
-                                .orElseThrow(() -> new UnknownProductException()),
+                        productService.getProduct(itemRequest.getProductName()),
                         itemRequest.getQuantity()))
                 .collect(Collectors.toList());
 

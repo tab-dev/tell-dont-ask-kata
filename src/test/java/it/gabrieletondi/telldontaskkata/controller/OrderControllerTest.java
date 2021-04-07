@@ -3,6 +3,7 @@ package it.gabrieletondi.telldontaskkata.controller;
 import it.gabrieletondi.telldontaskkata.domain.model.Category;
 import it.gabrieletondi.telldontaskkata.domain.model.Product;
 import it.gabrieletondi.telldontaskkata.domain.exception.UnknownProductException;
+import it.gabrieletondi.telldontaskkata.domain.service.ProductService;
 import it.gabrieletondi.telldontaskkata.repository.ProductCatalog;
 import it.gabrieletondi.telldontaskkata.domain.service.OrderService;
 import it.gabrieletondi.telldontaskkata.controller.model.SellItemRequest;
@@ -30,17 +31,17 @@ public class OrderControllerTest {
     private OrderService orderService;
 
     @Mock
-    private ProductCatalog productCatalog;
+    private ProductService productService;
 
     @Before
     public void setUp() throws Exception {
         Category food = new Category("food", BigDecimal.valueOf(10));
         doReturn(new Product("salad",
                 new BigDecimal("3.56"),
-                food)).when(productCatalog).getByName("salad");
+                food)).when(productService).getProduct("salad");
         doReturn(new Product("tomato",
                 new BigDecimal("4.65"),
-                food)).when(productCatalog).getByName("tomato");
+                food)).when(productService).getProduct("tomato");
     }
 
     @Test
@@ -60,17 +61,6 @@ public class OrderControllerTest {
 
         orderController.create(request);
 
-    }
-
-    @Test(expected = UnknownProductException.class)
-    public void unknownProduct() throws Exception {
-        SellItemsRequest request = new SellItemsRequest();
-        request.setRequests(new ArrayList<>());
-        SellItemRequest unknownProductRequest = new SellItemRequest();
-        unknownProductRequest.setProductName("unknown product");
-        request.getRequests().add(unknownProductRequest);
-
-        orderController.create(request);
     }
 
     @Test
